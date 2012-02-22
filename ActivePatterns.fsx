@@ -45,6 +45,35 @@ tailDescription 1.8<cm> garfield
 tailDescription 1.8<cm> { garfield with HasTail = false}
 
 
+// Parameterized Active Patterns
+
+let cats = ["Robert"; "Loki"; "Gremlin"]
+
+let (|Contains|) (s : string) (l : string list) =
+  List.exists ((=) s) l
+
+let famousCat = "Robert" 
+
+match cats with
+ | Contains "Artemis" true -> printfn "Yay! We found our cat!"
+ | Contains famousCat true -> printfn "A famous cat is in the room"
+ | _ -> printfn "Just some cats" 
+
+
+// Something that looks more useful
+let (|CharAt|) (i: int) (s:string) =
+   s.[i]
+
+let chooseLine =
+   function 
+     | CharAt 1 'A' 
+     | CharAt 1 'E' -> 1
+     | CharAt 0 c when c < 'M' -> 2
+     | _ -> 3
+
+chooseLine "Loki"
+
+
 // Multicase Active Patterns
 
 
@@ -101,33 +130,3 @@ let reportError2 em =
        ()
 
 
-
-
-
-// Parameterized Active Patterns
-
-
-let cats = ["Robert"; "Loki"; "Gremlin"]
-
-let (|Contains|) (s : string) (l : string list) =
-  List.exists ((=) s) l
-
-let famousCat = "Robert" 
-
-match cats with
- | Contains "Artemis" true -> printfn "Yay! We found our cat!"
- | Contains famousCat true -> printfn "A famous cat is in the room"
- | _ -> printfn "Just some cats" 
-
-
-let (|CharAt|) (i: int) (s:string) =
-   s.[i]
-
-let chooseLine =
-   function 
-     | CharAt 1 'A' 
-     | CharAt 1 'E' -> 1
-     | CharAt 0 c when c < 'M' -> 2
-     | _ -> 3
-
-chooseLine "Loki"

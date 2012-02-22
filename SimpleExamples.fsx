@@ -45,6 +45,19 @@ let rec eatTheNuts  =
 
 eatTheNuts allTheNuts
 
+// Value Capture
+let scotches = ["Abunadh";"Buichladdich";"Glenmorangie";"Macallen";"Lagavulin";"Aberlour"]
+
+[<Literal>]
+let Favorite = "Glenmorangie"
+
+let result =
+ match scotches with
+   | [Favorite; _] as wholeList  -> sprintf "My favorite scotch is up first in %A" wholeList 
+   | [a;b] when a <> b -> "Two scotches " + a + " and " + b
+   | list -> "A whole flight: " + String.concat " and " list
+
+
 // Tuples
 
 [<Literal>]
